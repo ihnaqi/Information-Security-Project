@@ -1,0 +1,34 @@
+<div>
+    <div *ngIf="currentDoctor.doctor_id" class="edit-form">
+        <b><h2>Add an Doctor</h2></b>
+        <form>
+            
+            <!-- <div class="form-group">
+                <label for="doctor_name">Date Created</label> <br>
+                <input type="date" id="doctor_name" name="doctor_name" required [(ngModel)]="currentDoctor.doctor_name"> -->
+                <!-- <input class="form-control" id="doctor_name" required [(ngModel)]="doctor.doctor_name" name="doctor_name" /> -->
+            <!-- </div> -->
+
+            <!-- <label for="doctor">Doctor ID</label> <br>
+            <select id="doctor" name="doctor" class=form-group required [(ngModel)]="currentDoctor.doctor">
+             
+            </select> -->
+
+
+        </form>
+
+        <button class="badge badge-danger mr-2 " (click)="deleteDoctor() ">
+      Delete
+    </button>
+
+        <button type="submit " class="badge badge-success mb-2 " (click)="updateDoctor() ">
+      Update
+    </button>
+        <p>{{ message }}</p>
+    </div>
+
+    <div *ngIf="!currentDoctor.doctor_id ">
+        <br />
+        <p>Cannot access this Doctor...</p>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql:latest
+    # command: --default-authentication-plugin=mysql_native_password --explicit_defaults_for_timestamp=1 --initialize-insecure --skip-name-resolve --lower_case_table_names=1
+    environment:
+      MYSQL_ROOT_PASSWORD: myrootpassword
+      MYSQL_DATABASE: mydbname
+      MYSQL_USER: mydbuser
+      MYSQL_PASSWORD: mydbpassword
+    volumes:
+      - ./db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "db"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+  
+  angular-frontend:
+    build:
+      context: ./angular
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    volumes:
+      - /app/node_modules
+      - ./angular:/app
+
+  django-backend:
+    build:
+      context: ./hms_django
+    # command: /entrypoint.sh
+    ports:
+      - "8000:8000"
+    restart: always
+  
+    volumes:
+      - ./hms_django:/app
+    environment:
+      - DB_HOST=db
+      - DB_NAME=mydbname
+      - DB_USER=mydbuser
+      - DB_PASSWORD=mydbpassword
+      - DB_PORT=3306
+    depends_on:
+      - db
+      - angular-frontend
+    links:
+      - db
+
+  
+

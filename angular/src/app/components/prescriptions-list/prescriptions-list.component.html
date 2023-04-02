@@ -1,0 +1,57 @@
+<div class="col">
+    <div id="page-content">
+        <div id="prescriptions">
+            <div id="table-container">
+                <div id="table-header">
+                    <div id="table-header-left">
+                        <span id="tab-title">Prescriptions</span>
+                    </div>
+                    <div id="table-header-right">
+                        <div>
+                            <!-- <input id="search" type="text" placeholder="Search Prescriptions" [(ngModel)]="prescription_type">
+                            <button id="search-prescriptions" class="table-header-button" (click)="searchPrescriptions()">Search Prescriptions</button> -->
+                            <!-- <button id="add-prescription" class="table-header-button" routerLink="/Add-Prescription">Add Prescriptions</button> -->
+                        </div>
+                    </div>
+                </div>
+                <table id="table">
+                    <thead>
+                        <tr>
+                            <td>Serial Nos</td>
+                            <td>Doctor</td>
+                            <td>Description</td>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr *ngFor="let prescription of prescriptions | paginate : {
+                            itemsPerPage: tableSize,
+                            currentPage: page,
+                            totalItems: count
+                          };
+                    let i = index" [class.active]="i == currentIndex"> -->
+                            <!-- <td>{{(page-1)*10 +i +1}}</td> -->
+                            <td>{{prescription.patient}}</td>
+                            <td>{{prescription.doctor}}</td>
+                            <td>{{prescription.description}}</td>
+                            <td>
+                                <!-- <a routerLink="/View-Prescriptions/{{prescription.prescription_id}}">
+                                    View
+                                </a> | -->
+                                <!-- <a routerLink="/Prescriptions/{{prescription.prescription_id}}">
+                                    Edit
+                                </a> -->
+                            </td>
+                        <!-- </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class=" d-flex justify-content-center ">
+        <!-- <pagination-controls previousLabel="Prev" Responsive=True nextLabel="Next" (pageChange)="tabSize($event)">
+
+        </pagination-controls> -->
+    </div>
+</div>

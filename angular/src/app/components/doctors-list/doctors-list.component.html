@@ -1,0 +1,60 @@
+<div class="col">
+    <div id="page-content">
+        <div id="doctors">
+            <div id="table-container">
+                <div id="table-header">
+                    <div id="table-header-left">
+                        <span id="tab-title">Doctors</span>
+                    </div>
+                    <div id="table-header-right">
+                        <div>
+                            <input id="search" type="text" placeholder="Search Doctors" [(ngModel)]="doctor_name">
+                            <button id="search-doctors" class="table-header-button" (click)="searchDoctors()">Search Doctors</button>
+                            <button id="add-doctors" class="table-header-button" routerLink="/Add-Doctor">Add Doctors</button>
+                        </div>
+                    </div>
+                </div>
+                <table id="table">
+                    <thead>
+                        <tr>
+                            <td>Serial No</td>
+                            <td>Date Created</td>
+                            <td>Doctor Type</td>
+                            <td>Doctor Amount</td>
+                            <td>
+                                View Doctor
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let doctor of doctors | paginate : {
+                            itemsPerPage: tableSize,
+                            currentPage: page,
+                            totalItems: count
+                          };
+                    let i = index" [class.active]="i == currentIndex">
+                            <td>{{(page-1)*10 +i +1}}</td>
+                            <td>{{doctor.date_created}}</td>
+                            <td>{{doctor.doctor_type}}</td>
+                            <td>{{doctor.doctor_amount}}</td>
+                            <td>
+                                <!-- <a routerLink="/View-Doctors/{{doctor.doctor_id}}">
+                                    View
+                                </a> | -->
+                                <a routerLink="/Doctors/{{doctor.doctor_id}}">
+                                    Edit
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class=" d-flex justify-content-center ">
+        <pagination-controls previousLabel="Prev" Responsive=True nextLabel="Next" (pageChange)="tabSize($event)">
+
+        </pagination-controls>
+    </div>
+</div>
